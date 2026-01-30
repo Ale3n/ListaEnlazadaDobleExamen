@@ -52,7 +52,9 @@ public class ListaD {
     }
 
     public void eliminarPrim() {
-        if (vacia()) return;
+        if (vacia()) {
+            return;
+        }
         if (prim == ult){
             prim = ult = null;
         }
@@ -64,7 +66,9 @@ public class ListaD {
     }
 
     public void eliminarUlt() {
-        if (vacia()) return;
+        if (vacia()){
+            return;
+        }
         if (prim == ult){
             prim = ult = null;
         }

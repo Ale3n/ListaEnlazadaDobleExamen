@@ -15,24 +15,26 @@ public class ListaP {
 
     public ListaP() {
         cantElem = 0;
-        prim = ult = null;    
+        prim = ult = null;
     }
     
     public String toString()
     {
         Nodo p = prim;
         String s = "[";
-        while (p!=null) {
+        while (p !=null) {
             s+=p.elem;
             if (p.prox != null) {
-                 s+=",";
+                s+=",";
             }
+            p = p.prox;
         }
         return s+="]";
     }
+    
     public boolean vacia()
     {
-     return cantElem == 0;  
+        return cantElem == 0;
     }
     
     public void insertarPrim(int x)
@@ -44,8 +46,7 @@ public class ListaP {
         }
         cantElem++;
     }
-    
-     public void insertarUlt(int x)
+    public void insertarUlt(int x)
     {
         if (vacia()) {
             prim = ult = new Nodo(null,x,null);
@@ -54,8 +55,7 @@ public class ListaP {
         }
         cantElem++;
     }
-     
-     public void elimianrPrim()
+    public void eliminarPrim()
     {
         if (vacia()) {
             return;
@@ -68,7 +68,7 @@ public class ListaP {
         }
         cantElem--;
     }
-     public void elimianrUlt()
+    public void eliminarUlt()
     {
         if (vacia()) {
             return;
@@ -81,21 +81,22 @@ public class ListaP {
         }
         cantElem--;
     }
-     public void reemplazar(int x, int y)
+    
+    public void reemplazar(int x, int y)
     {
         Nodo p = prim;
-        while (p!=null) {
+        while (p !=null) {
             if (p.elem == x) {
                 p.elem = y;
             }
             p = p.prox;
         }
     }
-     public int fecuencia(int x)
+    public int frecuencia(int x)
     {
         Nodo p = prim;
         int c = 0;
-        while (p!=null) {
+        while (p !=null) {
             if (p.elem == x) {
                 c++;
             }
@@ -103,158 +104,154 @@ public class ListaP {
         }
         return c;
     }
-     
-     public boolean diferentes()
+    public boolean diferentes()
     {
         Nodo p = prim;
-        while (p!=null) {
-            if (fecuencia(p.elem)>1) {
+        while (p !=null) {
+            if (frecuencia(p.elem)>1) {
                 return false;
             }
             p = p.prox;
         }
         return true;
     }
-     public boolean poker()
+    public boolean poker()
     {
         Nodo p = prim;
-        while (p!=null) {
-            if (fecuencia(p.elem)==cantElem-1) {
-                return false;
-            }
-            p = p.prox;
-        }
-        return true;
-    }
-     public void insertarUlt(ListaD l)
-    {
-        Nodo p = l.prim;
-        while (p!=null) {
-            insertarUlt(p.elem);
-            p = p.prox;
-        }
-    }
-     
-    public void intercalar(ListaD l1, ListaD l2)
-    {
-        Nodo p = prim;
-        Nodo q = prim;
-        while (p!=null || q!=null) {
-            if (p!=null) {
-               insertarUlt(p.elem);
-               p = p.prox;
-            }
-            if (q!=null) {
-               insertarUlt(q.elem);
-               q = q.prox;
-            }
-        }
-    }
-    
-    public void eliminarNodo(Nodo p)
-    {
-        if(p == prim) {
-            elimianrPrim();
-        } else if(p == ult){
-            elimianrUlt();
-        }else{
-            p.ant.prox = p.prox;
-            p.prox.ant = p.ant;
-            cantElem--;
-        }
-    }
-     public void elimianarPares()
-    {
-        Nodo p = prim;
-        while (p!=null) {
-            if (p.elem % 2 == 0) {
-                Nodo q = p.prox;
-                eliminarNodo(p);
-                p = q;
-            }else{
-            p = p.prox;
-            }
-        }
-    }
-    
-     public void elimianarMayores(int x)
-    {
-        Nodo p = prim;
-        while (p!=null) {
-            if (p.elem > x) {
-                Nodo q = p.prox;
-                eliminarNodo(p);
-                p = q;
-            }else{
-            p = p.prox;
-            }
-        }
-    }
-     
-    public void eliminarSiEstaEn(ListaP l)
-    {
-        Nodo p = prim;
-        while (p!=null) {
-            if (l.buscar(p.elem)) {
-                Nodo q = p.prox;
-                eliminarNodo(p);
-                p = q;
-            }else{
-            p = p.prox;
-            }
-        }
-    }
-    
-     public boolean buscar(int x)
-    {
-        Nodo p = prim;
-        while (p!=null) {
-            if (p.elem == x) {
+        while (p !=null) {
+            if (frecuencia(p.elem)==cantElem -1) {
                 return true;
             }
             p = p.prox;
         }
         return false;
     }
-     
-    public void elimianrPrim(int n)
+    
+    public void insertarUlt(ListaP l)
     {
-        Nodo p = prim;
-        while (n>0 && !vacia()) {
-           elimianrPrim();
-           n--;
-        }
-    }
-    public void elimianrUlt(int n)
-    {
-        Nodo p = prim;
-        while (n>0 && !vacia()) {
-           elimianrUlt();
-           n--;
-        }
-    }
-     
-    public void extremos(int n)
-    {
-        elimianrPrim(n);
-        elimianrUlt(n);
-    }
-     public void eliminarTodos(int x)
-    {
-        Nodo p = prim;
-        while (p!=null) {
-            if (p.elem == x) {
-                Nodo q = p.prox;
-                eliminarNodo(p);
-                p = q;
-            }else{
+        Nodo p = l.prim;
+        while (p !=null) {
+           insertarUlt(p.elem);
             p = p.prox;
+        }
+    }
+    public void intercalar(ListaP l1,ListaP l2)
+    {
+        Nodo p = l1.prim;
+        Nodo q = l2.prim;
+        while (p !=null || q !=null) {
+            if (p !=null) {
+                insertarUlt(p.elem);
+                 p = p.prox;
+            }
+            if (q !=null) {
+                insertarUlt(q.elem);
+                 q = q.prox;
             }
         }
     }
     
+    public void eliminarNodo(Nodo p)
+    {
+        if (p == prim) {
+            eliminarPrim();
+        } else if(p == ult) {
+            eliminarUlt();      
+        }else{
+            p.ant.prox = p.prox;
+            p.prox.ant = p.ant;
+            cantElem--;
+        {
+    }
+        }   
+    } 
+    public void eliminarPares()
+    {
+        Nodo p = prim;
+        while (p !=null) {
+            Nodo q = p.prox;
+            if (p.elem % 2 == 0) {
+                eliminarNodo(p);
+            }
+            p = q;
+            
+        }
+    }
+    public void eliminarMayores(int x)
+    {
+        Nodo p = prim;
+        while (p !=null) {
+            Nodo q = p.prox;
+            if (p.elem > x) {
+                eliminarNodo(p);
+            }
+            p = q;
+            
+        }
+    }
+    
+    public void eliminarEstanEn(ListaP l)
+    {
+        Nodo p = prim;
+        while (p !=null) {
+            Nodo q = p.prox;
+            if (l.buscar(p.elem)) {
+                eliminarNodo(p);
+            }
+            p = q;
+            
+        }
+    }
+    public boolean buscar(int x)
+    {
+        Nodo p = prim;
+        while (p !=null) {
+            if ((p.elem) == x) {
+                return true;
+            }
+            p = p.prox;
+        }
+        return false;
+    }
+    
+    
+    public void eliminarPrim(int n)
+    {
+        while (n>0 && !vacia()) {
+            eliminarPrim();
+        }
+    }
+    public void eliminarUlt(int n)
+    {
+        while (n>0 && !vacia()) {
+            eliminarUlt();
+        }
+    }
+    public void eliminarExtremos(int n)
+    {
+        
+            eliminarUlt(n);
+            eliminarPrim(n);
+    }
+    
+    public void eliminarTodos(int x)
+    {
+        Nodo p = prim;
+        while (p !=null) {
+            Nodo q = p.prox;
+            if (p.elem  == x) {
+                eliminarNodo(p);
+            }
+            p = q;
+            
+        }
+    }
+    
+    
      
     
     
     
+
 }
+   
