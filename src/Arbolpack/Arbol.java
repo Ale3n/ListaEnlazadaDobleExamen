@@ -13,7 +13,6 @@ import java.util.Random;
 
 public class Arbol {
     private Nodo raiz;
-    private Random r = new Random();
 
     public Arbol() {
         raiz = null;
@@ -188,6 +187,7 @@ public class Arbol {
 
     // 12. Generar elementos
     public void generarElem(int n, int a, int b) {
+        Random r = new Random(); 
         int count = 0;
         while (count < n) {
             int x = r.nextInt(b - a + 1) + a;
