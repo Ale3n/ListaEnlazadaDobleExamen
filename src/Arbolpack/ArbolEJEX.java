@@ -128,24 +128,21 @@ public class ArbolEJEX {
         }
             
     }
-    // 15. Árbol lineal
-    public boolean lineal() {
-        return lineal(raiz);
+   // 14. Mostrar terminales
+    public void mostrarTerm() {
+        mostrarTerm(raiz);
+        System.out.println();
     }
 
-    private boolean lineal(Nodo p) {
+    private void mostrarTerm(Nodo p) {
         if (p == null) {
-            return true;
+            return;
         } else {
-            if (p.izq != null && p.der != null) {
-                return false;
-            } else {
-                if (p.izq != null) {
-                    return lineal(p.izq);
-                } else {
-                    return lineal(p.der);
-                }
+            mostrarTerm(p.izq);
+            if (p.izq == null && p.der == null) {
+                System.out.print(p.elem + " ");
             }
+            mostrarTerm(p.der);
         }
     }
     ////////////////////////////////////////////////////////////////////////////
